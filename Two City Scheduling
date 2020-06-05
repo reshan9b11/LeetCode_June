@@ -1,0 +1,26 @@
+class Solution {
+public:
+    
+    static bool cmp(const vector<int> &a, const vector<int> &b) {
+        return abs(a[0]-a[1]) > abs(b[0]-b[1]);
+    }
+    int twoCitySchedCost(vector<vector<int>>& costs) {
+     
+        int x=costs.size();
+        int a=x/2;
+        int b=a;
+        int sum=0;
+        sort(costs.begin(),costs.end(),cmp);
+        for(int  i=0;i<x;i++){
+            if(b==0 || (costs[i][0]<=costs[i][1] && a>0)){
+                a--;
+                sum+=costs[i][0];
+            }
+            else{
+                b--;
+                sum+=costs[i][1];
+            }
+        }
+        return sum;
+    }
+};
