@@ -1,0 +1,33 @@
+class Solution {
+public:
+    int change(int amount, vector<int>& coins) {
+        // int x[amount+1][coins.size()];
+        // int a,b;
+        // for(int i=0;i<coins.size();i++){
+        //     x[0][i]=1;
+        // }
+        
+        // for(int i=1;i<amount+1;i++){
+        //     for(int j=0;j<coins.size();j++){
+        //         a=(i-coins[j]>=0) ? x[i - coins[j]][j] : 0;
+        //         b=(j>=1) ? x[i][j-1] : 0;
+        //         x[i][j]=a+b;
+        //     }
+        // }
+        // return x[amount][coins.size()-1];
+        
+        int x[amount+1];
+        for(int i=0;i<amount+1;i++){
+            x[i]=0;
+        
+        }
+        x[0]=1;
+        for(int i=0; i<coins.size(); i++) 
+        for(int j=coins.at(i); j<=amount; j++) 
+            x[j] += x[j-coins.at(i)];
+        
+         return x[amount];
+        
+    }
+   
+};
