@@ -1,0 +1,49 @@
+//Given a string s, find the longest palindromic substring in s. 
+
+
+
+class Solution {
+public:
+    string longestPalindrome(string s) {
+        if(s.length()==1){
+            return s;
+        }
+        if(s.length() <1) return "";
+        
+        if(s.length()==2){
+            if(s.at(0)==s.at(1)) return s;
+        }
+        int h,l;
+        string result;
+       int maxlength=1;
+        int start =0;
+        for(int i=1;i<s.length();++i){
+            l=i-1;
+            h=i;
+            while(l>=0 && h < s.length() && s.at(l)==s.at(h)){
+                if( h-l +1 > maxlength){
+                    start = l;  
+                maxlength = h - l + 1; 
+                }
+                
+                --l;
+                ++h;
+            }
+            l=i-1;
+            h=i+1;
+             while(l>=0 && h < s.length() && s.at(l)==s.at(h)){
+                if( h-l +1 > maxlength){
+                    start = l;  
+                maxlength = h - l + 1; 
+                }
+                
+                --l;
+                ++h;
+            }
+            
+        }
+        return s.substr(start,maxlength );
+        
+        
+    }
+};
