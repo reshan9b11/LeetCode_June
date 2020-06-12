@@ -1,0 +1,31 @@
+class Solution {
+public:
+    vector<string> letterCombinations(string digits) {
+        if(digits.length()==0) return {};
+        string table[10] 
+        = { "", "", "abc", "def", "ghi", "jkl", 
+            "mno", "pqrs", "tuv", "wxyz" }; 
+        
+        vector<string> result;
+        queue<string> q;
+        q.push("");
+        
+        while(!q.empty()){
+            
+           string s=q.front();
+            q.pop();
+            
+            if(s.length()==digits.length()){
+                result.push_back(s);
+            }
+            else{
+                
+                for(auto x : table[digits.at(s.length()) - '0' ] ){
+                    q.push(s+x);
+                }
+            }
+            
+        }
+        return result;
+    }
+};
