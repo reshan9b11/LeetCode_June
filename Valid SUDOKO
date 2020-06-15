@@ -1,0 +1,167 @@
+class Solution {
+public:
+//     bool isvalid(vector<vector<char>>& board){
+//         for(int i=0;i<9;i++){
+//             for(int j=0;j<9;j++){
+                
+//                 if(!is_row_col(board,i,j) && !is_box(board,i-i%3,j-j%3)){
+//                     return false;
+//                 }
+//             }
+//         }
+//         return true;
+//     }
+    
+//     bool is_box(vector<vector<char>>& board, int row,int col){
+        
+//         set<char> st; 
+  
+//     for (int i = 0; i < 3; i++) { 
+//         for (int j = 0; j < 3; j++) { 
+//             char curr = board[row + i][col + j]; 
+  
+             
+//             if (st.find(curr) != st.end()) 
+//                 return false; 
+  
+        
+//             if (curr != '.') 
+//                 st.insert(curr); 
+//         } 
+//     } 
+//     return true; 
+//     }
+    
+//     bool is_row_col(vector<vector<char>>& board, int row,int col){
+//         //Checking for Column
+//         set<char> colll; 
+//      for (int i = 0; i < 9; i++) { 
+  
+        
+//         if (colll.find(board[i][col]) != colll.end()) 
+//             return false; 
+  
+        
+//         if (board[i][col] != '.') 
+//             colll.insert(board[i][col]); 
+//     } 
+   
+//         //checking for ROW
+//         set<char> rowww; 
+  
+//     for (int i = 0; i < 9; i++) { 
+  
+        
+//         if (rowww.find(board[row][i]) != rowww.end()) 
+//             return false; 
+  
+//         if (board[row][i] != '.') 
+//             rowww.insert(board[row][i]); 
+//     } 
+//     return true; 
+        
+        
+//     }
+    
+  //  bool isvalid(vector<vector<char>>& board)
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    bool notInRow(vector<vector<char>>& arr, int row) 
+{ 
+    // Set to store characters seen so far. 
+    set<char> st; 
+  
+    for (int i = 0; i < 9; i++) { 
+  
+        // If already encountered before, return false 
+        if (st.find(arr[row][i]) != st.end()) 
+            return false; 
+  
+        // If it is not an empty cell, insert value 
+        // at the current cell in the set 
+        if (arr[row][i] != '.') 
+            st.insert(arr[row][i]); 
+    } 
+    return true; 
+} 
+  
+// Checks whether there is any duplicate 
+// in current column or not. 
+bool notInCol(vector<vector<char>>& arr, int col) 
+{ 
+    set<char> st; 
+  
+    for (int i = 0; i < 9; i++) { 
+  
+        // If already encountered before, return false 
+        if (st.find(arr[i][col]) != st.end()) 
+            return false; 
+  
+        // If it is not an empty cell, 
+        // insert value at the current cell in the set 
+        if (arr[i][col] != '.') 
+            st.insert(arr[i][col]); 
+    } 
+    return true; 
+} 
+  
+// Checks whether there is any duplicate 
+// in current 3x3 box or not. 
+bool notInBox(vector<vector<char>>& arr, int startRow, int startCol) 
+{ 
+    set<char> st; 
+  
+    for (int row = 0; row < 3; row++) { 
+        for (int col = 0; col < 3; col++) { 
+            char curr = arr[row + startRow][col + startCol]; 
+  
+            // If already encountered before, return false 
+            if (st.find(curr) != st.end()) 
+                return false; 
+  
+            // If it is not an empty cell, 
+            // insert value at current cell in set 
+            if (curr != '.') 
+                st.insert(curr); 
+        } 
+    } 
+    return true; 
+} 
+  
+// Checks whether current row and current column and 
+// current 3x3 box is valid or not 
+bool isValid(vector<vector<char>>& arr, int row, int col) 
+{ 
+    return notInRow(arr, row) && notInCol(arr, col) && 
+           notInBox(arr, row - row % 3, col - col % 3); 
+} 
+  
+bool isValidConfig(vector<vector<char>>& arr, int n) 
+{ 
+    for (int i = 0; i < n; i++) { 
+        for (int j = 0; j < n; j++) { 
+  
+            // If current row or current column or 
+            // current 3x3 box is not valid, return false 
+            if (!isValid(arr, i, j)) 
+                return false; 
+        } 
+    } 
+    return true; 
+} 
+    
+    
+    
+    
+    bool isValidSudoku(vector<vector<char>>& board) {
+        
+        return (isValidConfig(board,9));
+    }
+};
