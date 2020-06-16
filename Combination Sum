@@ -31,3 +31,45 @@ public:
         return result;
     }
 };
+
+
+
+
+COMBINATION SUM 2 LEETCODE
+
+class Solution {
+public:
+    void find(vector<int>& one,vector<vector<int>>& result,vector<int>& candidates,int i, int target)
+    {
+        if(target<0){
+            return;
+        }
+        if(target==0){
+            result.push_back(one);
+            return ;
+        }
+        int prev=-1;
+        while(i<candidates.size()){
+            
+            if(prev!=candidates[i]){
+            one.push_back(candidates[i]);
+            
+            find(one,result,candidates,i+1,target - candidates[i]);// use i=0 if you didnot want unique solution e.g{2,3,2},{2,2,3}..
+            
+            prev=candidates[i];
+            one.pop_back();
+        }
+            i++;
+        }
+        
+    }
+    
+    vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
+        sort(candidates.begin(),candidates.end());
+        //candidates.erase(unique(candidates.begin(), candidates.end()), candidates.end());
+        vector<int> one;
+        vector<vector<int>> result;
+        find(one,result,candidates,0,target);
+        return result;
+    }
+};
