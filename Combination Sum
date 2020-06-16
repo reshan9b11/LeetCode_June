@@ -1,0 +1,33 @@
+class Solution {
+public:
+    void find(vector<int>& one,vector<vector<int>>& result,vector<int>& candidates,int i, int target)
+    {
+        if(target<0){
+            return;
+        }
+        if(target==0){
+            result.push_back(one);
+            return ;
+        }
+        
+        while(i<candidates.size() && target - candidates[i] >= 0){
+            one.push_back(candidates[i]);
+            
+            find(one,result,candidates,i,target - candidates[i]);// use i=0 if you didnot want unique solution e.g{2,3,2},{2,2,3}..
+            i++;
+            
+            one.pop_back();
+        }
+        
+        
+    }
+    
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        sort(candidates.begin(),candidates.end());
+        candidates.erase(unique(candidates.begin(), candidates.end()), candidates.end());
+        vector<int> one;
+        vector<vector<int>> result;
+        find(one,result,candidates,0,target);
+        return result;
+    }
+};
