@@ -1,0 +1,60 @@
+class Solution {
+public:
+    int firstMissingPositive(vector<int>& nums) {
+//         if(nums.size()==0){
+//             return 1;
+//         }
+//         if(nums.size()==1 ){
+//             int t=nums[0];
+//             if(t==0){
+//                 return 1;
+//             }
+//             else if(t==1){
+//                 return 2;
+//             }
+//             else{
+//                 return 1;
+//             }
+//         }
+//         int j=0;
+//         for(int i=0;i<nums.size();i++){
+//             if(nums[i]<=0){
+//                 int t=nums[i];
+//                 nums[i]=nums[j];
+//                 nums[j]=t;
+//                 j++;
+//             }
+//         }
+        
+//         for (int i = j; i < nums.size(); i++) { 
+//         if (abs(nums[i]) - 1 < nums.size()-1 && nums[abs(nums[i]) - 1] > 0) 
+//             nums[abs(nums[i]) - 1] = -nums[abs(nums[i]) - 1]; 
+//     }
+//          for(int i=j;i<nums.size();i++){
+//             if(nums[i]>0){
+//                 return i+1;
+//             }
+//          }
+//         if(j==nums.size()){
+//             return 1;
+//         }
+//         return nums.size()-j+1;
+        
+         for(int i=0;i<nums.size();i++){
+            if(nums[i]>0&&nums[i]<=nums.size()){
+                if(nums[i]-1!=i && nums[nums[i]-1]!=nums[i]){
+                    int temp=nums[nums[i]-1];
+                    nums[nums[i]-1]=nums[i];
+                    nums[i]=temp;
+                    i--;
+                }
+            }
+        }
+        for(int i=0;i<nums.size();i++)
+            if(nums[i]!=i+1)
+                return i+1;
+        return nums.size()+1;
+        
+        
+    }
+};
