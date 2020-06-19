@@ -19,3 +19,37 @@ public:
         return result;
     }
 };
+
+//UNIQUE PERMUTATON
+class Solution {
+    vector<vector<int>> result;
+public:
+    bool shouldSwap(vector<int>& nums, int start, int curr) 
+{ 
+    for (int i = start; i < curr; i++)  
+        if (nums[i] == nums[curr]) 
+            return 0; 
+    return 1; 
+} 
+    
+    void permu(vector<int>& nums,int l,int h){
+        
+        if(l==h){
+            result.push_back(nums);
+        }
+        for(int i=l;i<h;i++){
+            bool check = shouldSwap(nums, l, i); 
+            if(check){
+            swap(nums[l],nums[i]);
+            permu(nums,l+1,h);
+            swap(nums[l],nums[i]);
+            }
+        }
+    }
+    
+    vector<vector<int>> permuteUnique(vector<int>& nums) {
+        
+        permu(nums,0,nums.size());
+        return result;
+    }
+};
