@@ -1,0 +1,46 @@
+class Solution {
+public:
+    vector<int> spiralOrder(vector<vector<int>>& matrix) {
+        vector<int> result;
+        if(matrix.size()==0){
+            return {};
+        }
+        int row=matrix.size(),srow=0;
+        int col=matrix[0].size(),scol=0;
+        int counter;
+        while(srow < row && scol < col){
+            
+            //first row from the remaining row
+            for(int i=scol;i<col;i++){
+                result.push_back(matrix[srow][i]);
+            }
+            
+            srow++;
+            // Print the last column  from the remaining columns
+         
+            for(int i=srow;i<row;i++){
+                result.push_back(matrix[i][col-1]);
+            }
+            col--;
+            
+            if(srow<row){
+                //  Print the last row from the remaining rows
+                for(int i=col-1;i>=scol;i--){
+                    result.push_back(matrix[row-1][i]);
+                }
+                row--;
+            }
+            
+            if(scol<col){
+                for(int i=row-1;i>=srow;i--){
+                    result.push_back(matrix[i][scol]);
+                }
+                scol++;
+            }
+            
+        }
+        return result;
+        
+        
+    }
+};
