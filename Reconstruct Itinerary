@@ -50,3 +50,38 @@ public:
     }
         
 };
+
+
+////////////////////////////////////////////////////////////////////////////////////
+////////////////////////LeetCode////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////
+class Solution {
+public:
+    unordered_map<string, deque<string>> graph;
+    deque<string> result;
+    
+    vector<string> findItinerary(vector<vector<string>>& tickets) {
+        for(const auto &v:tickets) {
+            graph[v[0]].push_front(v[1]);
+        }
+        
+        for(auto &[src, v]:graph){
+            std::sort(v.begin(), v.end());
+        }
+        
+        dfs("JFK");
+        return vector<string>(result.begin(), result.end());
+    }
+    
+    void dfs(string src){
+        if(graph.find(src)!= graph.end()){
+            while(!graph[src].empty()){
+                string dst = graph[src].front();
+                graph[src].pop_front();
+                dfs(dst);
+            }
+        }
+        
+        result.push_front(src);
+    }
+};
